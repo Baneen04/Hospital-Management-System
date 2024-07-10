@@ -1,0 +1,1731 @@
+#include<iostream>
+#include <Windows.h>
+#include<fstream>
+using namespace std;
+s()
+{
+	
+	cout<<endl<<endl<<"\t\tLoading";
+	for(int i=0;i<6;i++){
+	Sleep(500);
+	cout<<"..";}
+	cout<<endl<<endl;
+}
+void waitForEnter(void){
+            cout<<"\n\n\n\t\t Press enter to go back \n\n";
+            cin.get();
+            cin.get();
+            system("cls");
+        }
+class Node
+{
+	public:
+//For Patient
+string pname;
+string plname;
+string pno;
+string pblood;
+int p_age,pid;
+//For Doctors
+int did;
+string time,dno;
+string dname;
+string dlastname;
+string dpost;
+string appointment;
+string data;
+int dsal;
+int dexp;
+//Appoinment 
+string name,apname;
+int id;
+//For Receptionist
+string rname;
+string rlastname;
+string rno;
+int rid;
+int rsal;
+int rexp;
+//For Admin
+string aname;
+string alastname;
+string ano;
+int aid;
+int asal;
+int aexp;
+char op;
+Node *next;
+Node(){
+	appointment = "Available";
+    dsal=50000;
+    dexp=5;
+    rsal=25000;
+    rexp=3;
+    asal=45000;
+    aexp=2;
+
+}
+};
+Node *head=NULL;
+Node *top=NULL;
+Node*front=NULL;
+Node*rear=NULL;
+//DOCTOR CLASS
+
+class Doctor:public Node{
+	public:
+		void Adddoctor();
+		void showdoctor();
+		void searchDoctor();
+		void Delete_doctor();
+		void update_doctor();
+		void doctor_list();
+		void Appointment();
+		void show_appointment();
+		void doctor_menue(); 
+};
+void Doctor::Adddoctor() {
+	system("cls");
+	char op;
+	jump:
+			ofstream dfile;
+	dfile.open("Doctor.txt", ios::app);
+	if (!dfile) {
+		cout << "No file";
+	}
+	else {
+	Node* newNode = new Node;
+	cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<60; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186) << "                                                            " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "              HOSPITAL MANAGEMENT SYSTEM                    " << char(186) << endl;
+				cout <<"\t\t" << char(186)<< "                                                            " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout<<"\t\t" << char(186) << "                  Enter Doctor Id: ";cin >> newNode->did;
+				cout <<"\t\t"<< char(186) << "                                                            " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2   
+        		cout <<"\t\t"<< char(186) << "                                                            " <<  endl;
+				cout <<"\t\t"<< char(186) << "                  Enter doctor name : ";cin >> newNode->dname;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3  
+                	cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                   Enter Your Number : ";cin >> newNode->dno;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 4
+        		cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter doctor Last name : ";cin >> newNode->dlastname;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 5
+                cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter doctor designation : ";cin >> newNode->dpost;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                //enter 6
+        		cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Available Time : ";cin >> newNode->time;
+				cout <<"\t\t"<< char(186) << "                                                            " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+dfile<<newNode->did<<"\t"<<newNode->dname<<"\t"<<newNode->dlastname<<"\t"<<newNode->time<<"\t"<<appointment<<endl;
+	if (head == NULL)
+	{
+		head = newNode;
+		newNode->next = NULL;
+
+	}
+	else
+	{
+		Node* temp = head;
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = newNode;
+		newNode->next = NULL;
+	}
+		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+		cout <<"\t\t"<< char(186) << "                  Do u want to enter another record y/n : ";cin >> op;
+		cout <<"\t\t"<< char(186) << "                                                      " << endl;
+		cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+	if (op == 'y' || op == 'Y') {
+
+		goto jump;
+	}
+	else {
+		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+		cout <<"\t\t"<< char(186) << "                  Doctor record has been save successfully : "<<endl;
+		cout <<"\t\t"<< char(186) << "                                                      " << endl;
+		cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+        		s();
+	}}
+	waitForEnter();
+}
+void Doctor::showdoctor() {
+	string name,lname,no,app,time,post;
+	int id;
+	system("cls");
+	Node* temp = head;s();
+		ifstream dfile;
+	dfile.open("doctor.txt", ios::in);
+	if (!dfile) {
+		cout << "File Not Found: " << endl;
+		dfile.close();
+	}
+	else {
+		dfile>>id>>name>>lname>>time>>app;
+		temp->dname=name;
+		temp->did=id;
+		temp->dlastname=lname;
+		temp->time=time;
+		temp->appointment=app;
+	while (temp != NULL)
+	{
+		
+				cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         DOCTOR DETAIL                                " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Doctor Id is : " << temp->did << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         name is : " <<temp->dname  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Last name is : "<< temp->dlastname  <<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Designation is : " << temp->dpost << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Time is : " << temp->time << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Slot : " << temp->appointment<<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+
+		temp = temp->next;
+	}}
+	waitForEnter();
+}
+void Doctor::searchDoctor() {
+	int s;
+	int found = 0;
+		string name,lname,no,time,app;
+	int id;
+	cout << "Enter your value to search : " << endl;
+	cin >> s;
+
+	if (head==NULL)
+	{
+		cout << "Linked list is empty : " << endl;
+	}
+	else
+	{
+			ifstream dfile;
+	dfile.open("doctor.txt", ios::in);
+	if (!dfile) {
+		cout << "File Not Found: " << endl;
+		dfile.close();
+	}
+	else {
+		dfile>>id>>name>>lname>>time>>app;
+		Node* temp = head;
+			dfile>>id>>name>>lname>>time>>app;
+		temp->dname=name;
+		temp->did=id;
+		temp->dlastname=lname;
+		temp->time=time;
+		temp->appointment=app;
+		while (temp!=NULL)
+		{
+			//found++;
+			if (s == id)
+			{
+			cout << "/////////////////////////////////////////////////////////////////////\n\n";
+			cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186)  << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186)  << "               HOSPITAL MANAGEMENT SYSTEM             " << char(186) << endl;
+				cout <<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout<<"\t\t" << char(186) << "   Name:         "<<temp->dname<<"                      " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2  
+        		cout <<"\t\t"<< char(186) << "                                                      " <<  endl;
+				cout <<"\t\t"<< char(186) << "   ID:           "<<temp->did<<"                    "<<   endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3   
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Salary:       "<<temp->dsal<<"                    " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 4
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Experience:   "<<temp->dexp<<"                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Slot : " << temp->appointment<<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				found++;
+			}
+			temp = temp->next;
+		}
+		if (found==0)
+		{
+			cout << "Record Not found " << endl;
+		}
+	}}
+	waitForEnter();
+}
+void Doctor::doctor_list(){
+	Node *newNode=new Node;
+	string name,lname,no,time,app;
+	int id;
+			ifstream dfile;
+	dfile.open("doctor.txt", ios::in);
+	if (!dfile) {
+		cout << "File Not Found: " << endl;
+		dfile.close();
+		
+	}
+	else {
+		dfile>>id>>name>>lname>>time>>app;
+	newNode->data=name;
+	newNode->next=NULL;
+   if (rear == NULL) {
+      front = newNode;
+	   rear = newNode;
+   } else {
+      rear->next = newNode;
+      rear = newNode;
+   }
+}
+Node *temp;
+ temp = front;
+   if ((front == NULL) && (rear == NULL)) {
+      cout<<" Empty"<<endl;
+      return;
+   }
+   	cout<<"\t=====================================================================================================\n";
+   while (temp != NULL) {
+		cout<<"\t|ID|"<<"\t"<<"|Name|"<<"\t\t"<<"|Last Name|"<<"\t\t"<<"|Time|"<<"\t\t"<<"|slot|"<<"\n\n\n";
+		cout<<"\t"<<id<<"\t"<<name<<"\t\t  "<<lname<<"\t\t\t"<<time<<"\t\t "<<app<<"\n";
+      temp = temp->next;
+   }
+}
+void Doctor::Appointment() {
+	system("cls");
+	Node* temp = head;
+	int m_id,id,appid,find;
+	string apname,lastname,time,name,post,no;
+				ifstream dfile;
+			fstream file,myfile;
+			ofstream afile;
+		afile.open("Appointment.txt",ios::app);
+			doctor_list();
+		cout <<"\n\n\t\t"<< char(218);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(191) << endl; 
+	cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+	cout<<"\t\t" << char(186) << "             Enter doctor id to fix appointment :     ";
+	cin >> find;
+	afile<<find;
+	cout <<"\t\t"<< char(186) << "                                                      " << endl;
+	cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		file.open("doctor.txt",ios::in);
+		file>>id>>name>>lastname>>time>>appointment;
+		
+		//cout<<appointment<<endl;
+		while(!file.fail()){
+			file>>id>>name>>lastname>>time>>appointment;
+			
+			if (find == id   &&  appointment == "Booked"){
+				cout<<id<<appointment;
+				
+				cout <<"\n\t\t This Slot is buzy Right Know Try Another One: "<<endl;
+				break;
+				file.close();
+			}
+
+			
+			else{
+	fstream myfile,myfile1;
+			cout <<"\n\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "          Enter Doctor Id to Conform Your Appointment:  ";
+			cin>>find;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "             Patient Id :  ";cin>>appid;
+			afile<<appid<<endl;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "             Patient name : ";cin>>apname;
+			afile<<apname<<endl;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "        Appointment Has been Fixed with Doctor : "<<name<<endl;
+			afile<<temp->dname<<endl;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			
+		myfile1.open("doctor.txt",ios::in);
+	
+	if(!myfile1){
+		
+		cout<<"File Not Found: "<<endl;
+		myfile1.close();
+	}
+	
+		myfile.open("update_doctor.txt",ios::app);
+		myfile1>>id>>name>>lastname>>time>>appointment;
+		while(!myfile1.eof()){
+			
+			if(find == id){
+string n,l,t;
+ n = name;
+ l = lastname;
+ t = time;
+ 
+	appointment = "Booked";
+	myfile<<id<<"\t"<<n<<"\t"<<l<<"\t"<<t<<"\t"<<appointment<<endl;
+//	cout<<"y/n"<<endl;
+cout<<"\n\t\t Appointment Has Been Fixed Succesfully: "<<endl;
+}
+
+	else {		
+			myfile<<id<<"\t"<<name<<"\t"<<lastname<<"\t"<<time<<"\t"<<appointment<<endl;
+			
+			}
+			
+			myfile1>>id>>name>>lastname>>time>>appointment;
+
+}
+		myfile1.close();
+		myfile.close();
+		remove("doctor.txt");
+		rename("update_doctor.txt", "doctor.txt");
+		//	}
+		file.close();
+		myfile.close();
+		remove("doctor.txt");
+		rename("update_doctor.txt", "doctor.txt");	
+		waitForEnter();
+			
+		}
+			//break;
+		}
+	
+	
+ }
+
+void Doctor::show_appointment(){
+	Node *newNode;
+	int id;
+	string name,apname;
+  newNode = new Node;
+ 		ifstream afile;
+	afile.open("Appointment.txt", ios::in);
+	if (!afile) {
+		cout << "No file";
+	}
+	else {
+		afile>>id>>name>>apname;
+ newNode->name = name;
+ newNode->id=id;
+ newNode->apname=apname;
+ if(top == NULL)
+ newNode->next = NULL;
+ else
+ newNode->next = top;
+ top = newNode;
+   Node *temp = top;
+ while(temp != NULL)
+ {			cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+			cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+			cout<<"\t\t" << char(186) << "         Appoinment RECORDS                           " << char(186) << endl;
+			cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+ 			cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "             Patient Id : "<<temp->id<<endl;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "             Patient name :  "<<temp->name<<endl;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+			cout<<"\t\t" << char(186) << "           Appointment Has been Fixed with Doctor : "<<temp->apname<<endl;
+			cout <<"\t\t"<< char(186) << "                                                      " << endl;
+			cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+ temp = temp -> next;
+ }
+}
+}
+void Doctor::doctor_menue() {
+	system("cls");
+
+	int d;
+	do {
+			cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         DOCTORS RECORDS                              " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Press 1.Add New doctor data                  " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 2.Show Doctors                         " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 3. Check Appointments                  " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 4. Jump To main                        " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		cin >> d;
+		switch (d)
+		{
+
+		case 1:
+			Adddoctor();
+			break;
+
+		case 2:
+			showdoctor();
+			break;
+		case 3:
+			show_appointment();
+			break;
+		case 4:
+			waitForEnter();
+			break;
+		}
+	} while (d != 4);
+
+}
+//PATIENT CLASS
+
+class Patient:public Doctor{
+	public:
+void Addpatient();
+void searchpatient();
+void show_patient();
+void update_patient();
+void patient_menue();
+};
+void Patient::Addpatient() {
+	system("cls");
+	int a;
+	cout<<"\n\n\n\t\t\tEnter Number of patient you want to add ";
+	cin>>a;
+	system("cls");
+		ofstream pfile;
+	pfile.open("patient.txt", ios::app);
+	if (!pfile) {
+		cout << "No file";
+	}
+	else {
+	for(int i=0;i<a;i++){
+	//char op;
+	//jump :
+	Node* newNode = new Node;
+	newNode->next = NULL;
+				cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "              HOSPITAL MANAGEMENT SYSTEM              " << char(186) << endl;
+				cout <<"\t\t" << char(186)<< "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout<<"\t\t" << char(186) << "                  Enter Patient Id: ";cin >> newNode->pid;
+				pfile<<newNode->pid<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2  
+        		cout <<"\t\t"<< char(186) << "                                                      " <<  endl;
+				cout <<"\t\t"<< char(186) << "                  Enter name : ";cin >> newNode->pname;
+				pfile<<newNode->pname<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3  
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter Last name : ";cin >> newNode->plname;
+				pfile<<newNode->plname<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 4  
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter Age : ";cin >> newNode->p_age;
+				pfile<<newNode->p_age<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter patient blood Group : ";cin >> newNode->pblood;
+				pfile<<newNode->pblood<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+    if (newNode->pblood == "A+" || newNode->pblood =="a+" ||newNode->pblood == "b+" || 
+		newNode->pblood == "B+"|| newNode->pblood == "AB+" || newNode->pblood == "ab+"||
+		newNode->pblood == "O+" || newNode->pblood == "o+" || 
+		newNode->pblood == "O-" || newNode->pblood == "o-")
+	{
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Blood group is ok :                 "<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+			
+
+	}
+	else {
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                  This blood group is not exist       "  <<endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//cout << "This blood group is not exist : " << endl;
+	}
+
+	
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                   Enter Your Number : ";cin >> newNode->pno;
+				pfile<<newNode->pno<<endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+	if (head==NULL)
+	{
+		head = newNode;
+		newNode->next = NULL;
+		
+	}
+	else
+	{
+		Node* temp = head;
+		while (temp->next!=NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = newNode;
+		newNode->next = NULL;
+	}
+	}
+	s();
+waitForEnter();
+}
+}
+
+void Patient::searchpatient() {
+	int s;
+	string name,lname,no,bgrp;
+	int id,age;
+	int found = 0;
+	cout << "Enter your value to search : " << endl;
+	cin >> s;
+
+	if (head==NULL)
+	{
+		cout << "Linked list is empty : " << endl;
+	}
+	else
+	{
+			ifstream pfile;
+	pfile.open("patient.txt", ios::in);
+	if (!pfile) {
+		cout << "File Not Found: " << endl;
+		pfile.close();
+	}
+	else {
+		Node* temp = head;
+		pfile>>id>>name>>lname>>age>>bgrp>>no;
+		while (temp!=NULL)
+		{
+			//found++;
+			if (s == id)
+			{
+			cout << "/////////////////////////////////////////////////////////////////////\n\n";
+			cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186)  << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186)  << "               HOSPITAL MANAGEMENT SYSTEM             " << char(186) << endl;
+				cout <<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout<<"\t\t" << char(186) << "   Name:         "<<name<<"                      " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2  
+        		cout <<"\t\t"<< char(186) << "                                                      " <<  endl;
+				cout <<"\t\t"<< char(186) << "   ID:           "<<id<<"                    "<<   endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3   
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Blood Group:       "<<bgrp<<"                " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 4
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Phone Number:   "<<no<<"                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				found++;
+			}
+			temp = temp->next;
+		}}}
+		if (found==0)
+		{
+			cout << "Record Not found " << endl;
+		}
+	
+	waitForEnter();
+}
+
+void Patient::update_patient() {
+	int found = 0;
+	int up;
+	string name,lname,no,bgrp;
+	int id,age;
+	cout << "Enter value for update : " << endl;
+	cin >> up;
+	if (head == NULL)
+	{
+		cout << "Linked List Is empty : " << endl;
+	}
+	else
+	{
+			fstream pfile;
+	pfile.open("patient.txt", ios::in);
+	if (!pfile) {
+		cout << "File Not Found: " << endl;
+		pfile.close();
+	}
+	else {
+		Node* temp = head;
+		pfile>>id>>name>>lname>>age>>bgrp>>no;
+		
+		while (temp != NULL)
+		{
+
+			if (up == temp->pid&&up==id)
+			{
+				cout << "Enter Patient Id: " << endl;
+				cin >> temp->pid;
+				pfile<<temp->pid;
+				cout << "Enter name : " << endl;
+				cin >> temp->pname;
+				pfile<<temp->pname;
+				cout << "Enter Last name : " << endl;
+				cin >> temp->plname;
+				pfile<<temp->plname;
+				cout << "Enter Age : " << endl;
+				cin >> temp->p_age;
+				pfile<<temp->p_age;
+				cout << "Enter patient blood Group : " << endl;
+				cin >> temp->pblood;
+				pfile<<temp->pblood;
+				cout << "Enter Your Number : " << endl;
+				cin >> temp->pno;
+				pfile<<temp->pno;
+				found++;
+			}
+			temp = temp->next;
+		}
+
+	}}
+}
+void Patient::show_patient() {
+	string name,lname,no,bgrp;
+	int id,age;
+	system("cls");
+		Node* temp = head;
+		   s();
+		   	ifstream pfile;
+	pfile.open("patient.txt", ios::in);
+	if (!pfile) {
+		cout << "File Not Found: " << endl;
+		pfile.close();
+	}
+	else {
+		pfile>>id>>name>>lname>>age>>bgrp>>no;
+		temp->pid=id;
+		temp->pname=name;
+		temp->plname=lname;
+		temp->p_age=age;
+		temp->pblood=bgrp;
+		temp->pno=no;
+		while (temp != NULL)
+		{
+				cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         PATIENT DETAIL                               " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Patient Id is : " << temp->pid << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         name is : " << temp->pname  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Last name is : "<< temp->plname  <<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Age is : " << temp->p_age << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         patient blood Group is : " << temp->pblood<<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Your Number is : " << temp->pno<<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				temp = temp->next;
+			}
+//			if(temp==NULL)
+//			{
+//				cout<<"record not found\n\n";
+//			}
+			system("pause");
+			waitForEnter();
+			
+		}}
+void Patient::patient_menue() {
+	
+
+	int op;
+	do {
+		system("cls");
+		
+		cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         PATIENT RECORDS                              " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Press 1.Add Record Patient                   " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 2.Update Patient                       " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+			    cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 3. Search Patient                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 4. Show Patient                        " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 5. Appointment                         " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 6. Jump To main                        " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+
+		cin >> op;
+
+		switch (op)
+		{
+
+		case 1:
+
+			Addpatient();
+
+			break;
+						
+		case 2:
+			
+			update_patient();
+			break;
+		case 3:
+			searchpatient();
+
+			break;
+		case 4:
+			show_patient();
+			break;
+		case 5:
+			//doctor_list();
+			Appointment();
+			break;
+		case 6:
+			waitForEnter();
+			break;
+		}
+	} while (op != 6);
+
+	system("PAUSE");
+
+}
+class Receptionist:public Patient{
+	public:
+		void Addreceptionist();
+		void showreceptionist();
+		void receptionist_menue(); 
+		void searchreceptionist();
+		void update_receptionist();
+};
+
+void Receptionist::Addreceptionist() {
+	system("cls");
+	char op;
+		ofstream rfile;
+	rfile.open("Receptionist.txt", ios::app);
+	if (!rfile) {
+		cout << "No file";
+	}
+	else {
+	jump:
+	Node* newNode = new Node;
+	cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<60; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186) << "                                                            " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "              HOSPITAL MANAGEMENT SYSTEM                    " << char(186) << endl;
+				cout <<"\t\t" << char(186)<< "                                                            " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout<<"\t\t" << char(186) << "                  Enter Receptionist Id: ";cin >> newNode->rid;
+				rfile<< newNode->rid<<endl;
+				cout <<"\t\t"<< char(186) << "                                                            " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2   
+        		cout <<"\t\t"<< char(186) << "                                                            " <<  endl;
+				cout <<"\t\t"<< char(186) << "                  Enter Receptionist name : ";cin >> newNode->rname;
+				rfile<< newNode->rname<<endl;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3  
+        		cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter Receptionist Last name :  ";cin >> newNode->rlastname;
+				rfile<< newNode->rlastname<<endl;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+
+	if (head == NULL)
+	{
+		head = newNode;
+		newNode->next = NULL;
+
+	}
+	else
+	{
+		Node* temp = head;
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = newNode;
+		newNode->next = NULL;
+	}
+		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+		cout <<"\t\t"<< char(186) << "                  Do u want to enter another record y/n : ";cin >> op;
+		cout <<"\t\t"<< char(186) << "                                                      " << endl;
+		cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+	if (op == 'y' || op == 'Y') {
+
+		goto jump;
+	}
+	else {
+		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+		cout <<"\t\t"<< char(186) << "       Receptionist record has been save successfully : "<<endl;
+		cout <<"\t\t"<< char(186) << "                                                      " << endl;
+		cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+        		s();
+	}}
+	waitForEnter();
+}
+void Receptionist::showreceptionist() {
+	int id;
+	string name,lname;
+	system("cls");
+	Node* temp = head;s();
+	if(head==NULL)
+	cout<<endl<<endl<<"\t\tNo Record found"<<endl<<endl;
+	else{
+			ifstream rfile;
+	rfile.open("Receptionist.txt", ios::in);
+	if (!rfile) {
+		cout << "File Not Found: " << endl;
+		rfile.close();
+	}
+	else {
+		rfile>>id>>name>>lname;
+	temp->rid=id;
+	temp->rname=name;
+	temp->rlastname=lname;
+	while (temp != NULL)
+	{
+		
+				cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Receptionist DETAIL                          " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Receptionist Id is : " << temp->rid << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Name is : " << name  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Last name is : "<< temp->rlastname  <<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+
+		temp = temp->next;
+	}}
+	waitForEnter();
+}
+}
+void Receptionist::searchreceptionist() {
+	int s;
+	int found = 0;
+	int id;
+	string name,lname;
+	cout << "Enter your value to search : " << endl;
+	cin >> s;
+
+	if (head==NULL)
+	{
+		cout << "Linked list is empty : " << endl;
+	}
+	else
+	{
+		ifstream rfile;
+	rfile.open("Receptionist.txt", ios::in);
+	if (!rfile) {
+		cout << "File Not Found: " << endl;
+		rfile.close();
+	}
+	else {
+		Node* temp = head;
+			rfile>>id>>name>>lname;
+	temp->rid=id;
+	temp->rname=name;
+	temp->rlastname=lname;
+		while (temp!=NULL)
+		{
+			found++;
+			if (s == temp->rid)
+			{
+			cout << "/////////////////////////////////////////////////////////////////////\n\n";
+			cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186)  << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186)  << "               HOSPITAL MANAGEMENT SYSTEM             " << char(186) << endl;
+				cout <<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout<<"\t\t" << char(186) << "   Name:         "<<temp->rname<<"                      " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2  
+        		cout <<"\t\t"<< char(186) << "                                                      " <<  endl;
+				cout <<"\t\t"<< char(186) << "   ID:           "<<temp->rid<<"                    "<<   endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3   
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Salary:       "<<temp->rsal<<"                    " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 4
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Experience:   "<<temp->rexp<<"                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				found++;
+			}
+			temp = temp->next;
+		}
+		if (found==0)
+		{
+			cout << "Record Not found " << endl;
+		}
+	}}
+	waitForEnter();
+}
+
+void Receptionist::update_receptionist() {
+	int found = 0;
+	int up;
+		int id;
+	string name,lname;
+	cout << "Enter value for update : " << endl;
+	cin >> up;
+	if (head == NULL)
+	{
+		cout << "Linked List Is empty : " << endl;
+	}
+	else
+	{
+			fstream rfile;
+	rfile.open("Receptionist.txt", ios::in);
+	if (!rfile) {
+		cout << "File Not Found: " << endl;
+		rfile.close();
+	}
+	else {
+		rfile>>id>>name>>lname;
+		Node* temp = head;
+		while (temp != NULL)
+		{
+
+			if (up == id)
+			{
+				cout << "Enter Rceptionist Id: " << endl;
+				cin >> temp->rid;
+				rfile<<temp->rid<<endl;
+				cout << "Enter name : " << endl;
+				cin >> temp->rname;
+				rfile<<temp->rname<<endl;
+				cout << "Enter Last name : " << endl;
+				cin >> temp->rlastname;
+				rfile<<temp->rlastname<<endl;
+				cout << "Enter Your Number : " << endl;
+				cin >> temp->rno;
+				rfile<<temp->rno<<endl;
+				found++;
+			}
+			temp = temp->next;
+		}
+
+	}
+	}
+}
+
+void Receptionist::receptionist_menue() {
+	system("cls");
+
+	int d;
+	do {
+			cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Receptionist RECORDS                         " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Press 1.Add New Receptionist data            " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 2.Update Record Receptionist           " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 3. Search Receptionist                 " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 4.Show Receptionist                    " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 5. Patient Details                     " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 6. Doctors Details                     " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 7. Jump To main                        " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		cin >> d;
+		switch (d)
+		{
+
+		case 1:
+			Addreceptionist();
+			break;
+
+		case 2:
+			update_receptionist();
+			break;
+		case 3:
+			searchreceptionist();
+			break;
+		case 4:
+			showreceptionist();
+			break;
+		case 5:
+			patient_menue();
+			break;
+		case 6:
+			doctor_menue();
+			break;
+		case 7:
+			waitForEnter();
+			break;
+
+		}
+	} while (d != 7);
+
+}
+
+
+class Admin:public Receptionist{
+	public:
+		void Addadmin();
+		void showadmin();
+		void admin_menue(); 
+		void searchadmin();
+		void update_admin();
+		void login();
+};
+void Admin::Addadmin() {
+	
+	system("cls");
+	char op;
+		ofstream afile;
+	afile.open("Admin.txt", ios::app);
+	if (!afile) {
+		cout << "No file";
+	}
+	else {
+	jump:
+	Node* newNode = new Node;
+	cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<60; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186) << "                                                            " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "              HOSPITAL MANAGEMENT SYSTEM                    " << char(186) << endl;
+				cout <<"\t\t" << char(186)<< "                                                            " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout<<"\t\t" << char(186) << "                  Enter Admin Id: ";cin >> newNode->aid;
+				afile<<newNode->aid<<endl;
+				cout <<"\t\t"<< char(186) << "                                                            " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2   
+        		cout <<"\t\t"<< char(186) << "                                                            " <<  endl;
+				cout <<"\t\t"<< char(186) << "                  Enter Admin name : ";cin >> newNode->aname;
+				afile<<newNode->aname<<endl;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3  
+        		cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(186) << "                  Enter Admin Last name : ";cin >> newNode->alastname;
+				afile<<newNode->alastname<<endl;
+				cout <<"\t\t"<< char(186) << "                                                            "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+
+	if (head == NULL)
+	{
+		head = newNode;
+		newNode->next = NULL;
+
+	}
+	else
+	{
+		Node* temp = head;
+		while (temp->next != NULL)
+		{
+			temp = temp->next;
+		}
+		temp->next = newNode;
+		newNode->next = NULL;
+	}
+		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+		cout <<"\t\t"<< char(186) << "                  Do u want to enter another record y/n : ";cin >> op;
+		cout <<"\t\t"<< char(186) << "                                                      " << endl;
+		cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+	if (op == 'y' || op == 'Y') {
+
+		goto jump;
+	}
+	else {
+		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+		cout <<"\t\t"<< char(186) << "       Admin record has been save successfully :      "<<endl;
+		cout <<"\t\t"<< char(186) << "                                                      " << endl;
+		cout <<"\t\t"<< char(192);  for(int i=0; i<60; i++){cout << char(205);}    cout << char(217) << endl;
+        		s();
+	}}
+	waitForEnter();
+}
+void Admin::showadmin() {
+
+	system("cls");
+	int id;
+	string name,lname;
+	Node* temp = head;s();
+	if(head==NULL)
+	cout<<endl<<endl<<"\t\tNo Record found"<<endl<<endl;
+	else{
+		
+			ifstream afile;
+	afile.open("Admin.txt", ios::in);
+		
+	if (!afile) {
+		cout << "File Not Found: " << endl;
+		afile.close();
+	}
+
+	else {
+		afile>>id>>name>>lname;
+		temp->aid=id;
+		temp->aname=name;
+		temp->alastname=lname;
+	while (temp != NULL)
+	{
+		
+				cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Admin DETAIL                                 " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Admin Id is : " << temp->aid << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Name is : " << temp->aname  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+          		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Last name is : "<< temp->alastname  <<  endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+
+		temp = temp->next;
+	}}
+	waitForEnter();
+}
+}
+void Admin::searchadmin() {
+	int s;
+	int id;
+	string name,lname;
+	int found = 0;
+	cout << "Enter your value to search : " << endl;
+	cin >> s;
+
+	if (head==NULL)
+	{
+		cout << "Linked list is empty : " << endl;
+	}
+	else
+	{
+		
+			ifstream afile;
+	afile.open("Admin.txt", ios::in);
+	if (!afile) {
+		cout << "File Not Found: " << endl;
+		afile.close();
+	}
+	else {
+		afile>>id>>name>>lname;
+		Node* temp = head;
+		while (temp!=NULL)
+		{
+			found++;
+			if (s == id)
+			{
+			cout << "/////////////////////////////////////////////////////////////////////\n\n";
+			cout <<"\n\n\n\t\t"<< char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191) << endl;
+				cout <<"\t\t"<< char(186)  << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186)  << "               HOSPITAL MANAGEMENT SYSTEM             " << char(186) << endl;
+				cout <<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 1  
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout<<"\t\t" << char(186) << "   Name:         "<<name<<"                      " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 2  
+        		cout <<"\t\t"<< char(186) << "                                                      " <<  endl;
+				cout <<"\t\t"<< char(186) << "   ID:           "<<id<<"                    "<<   endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 3   
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Salary:       "<<temp->asal<<"                    " << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 4
+        		cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(186) << "   Experience:   "<<temp->aexp<<"                      "  << endl;
+				cout <<"\t\t"<< char(186) << "                                                      "  << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				found++;
+			}
+			temp = temp->next;
+		}
+		if (found==0)
+		{
+			cout << "Record Not found " << endl;
+		}
+	}}
+	waitForEnter();
+}
+
+void Admin::update_admin() {
+	int found = 0;
+	int up;
+	int id;
+	string name,lname;
+	cout << "Enter value for update : " << endl;
+	cin >> up;
+	if (head == NULL)
+	{
+		cout << "Linked List Is empty : " << endl;
+	}
+	else
+	{
+		
+			fstream afile;
+	afile.open("Admin.txt", ios::in);
+	if (!afile) {
+		cout << "File Not Found: " << endl;
+		afile.close();
+	}
+	else {
+		afile>>id>>name>>lname;
+		Node* temp = head;
+		while (temp != NULL)
+		{
+
+			if (up == id)
+			{
+				cout << "Enter Admin Id: " << endl;
+				cin >> temp->aid;
+				afile<<temp->aid;
+				cout << "Enter name : " << endl;
+				cin >> temp->aname;
+				afile<<temp->aname;
+				cout << "Enter Last name : " << endl;
+				cin >> temp->alastname;
+				afile<<temp->alastname;
+				cout << "Enter Your Number : " << endl;
+				cin >> temp->ano;
+				found++;
+			}
+			temp = temp->next;
+		}
+}
+	}
+}
+void Admin::admin_menue() {
+	system("cls");
+
+	int d;
+	do {
+			cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Admin RECORDS                                " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Press 1.Add New Admin data                   " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 2.Update Admin Record                  " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 3. Search Admin                        " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 4.Show Admin                           " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 5. Patient Details                     " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 6. Doctors Details                     " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 7. Receptionist Details                " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 8. Jump To main                        " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		cin >> d;
+		switch (d)
+		{
+
+		case 1:
+			Addadmin();
+			break;
+
+		case 2:
+			update_admin();
+			break;
+		case 3:
+			searchadmin();
+			break;
+		case 4:
+			showadmin();
+			break;
+		case 5:
+			patient_menue();
+			break;
+		case 6:
+			doctor_menue();
+			break;
+		case 7:
+			receptionist_menue();
+			break;
+		case 8:
+			waitForEnter();
+			break;
+
+		}
+	} while (d != 8);
+
+}
+void Admin::login(){
+	int password=1234;
+string username="Admin";
+string userinput;
+
+do{  
+	cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+	cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+	cout<<"\t\t" << char(186) << "         Admin Login                                  " << char(186) << endl;
+	cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+	cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ; 
+    cout << "\t\t Enter username:";
+	cin >> userinput;
+	
+ if (userinput == username){
+	cout <<"\n";
+	cout << "\t\t Enter password:";
+	cin >> password;
+	   if (password == 1234){
+    cout << "\t\t Access Granted...";
+    cout<<"\n \t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+    s();
+}
+    if (password != 1234)
+    cout << "\t\t Access Denied.....Invalid Username/Password:\n";
+     cout<<"\n \t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+}
+	} while (userinput != username);
+	admin_menue();
+}
+
+void splashscreen(){
+	 cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	 Sleep(20);
+	 
+ 	 	if(a==1 || a==18|| a==2|| a==3|| a==16|| a==17)
+	{
+	 		cout<<" ";
+	}
+	else
+	{         
+	cout<<char(233);	  
+	}
+	}cout<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	 Sleep(20);
+ 	 	if(a==1 || a==18|| a==2||   a==17)
+	{
+	 		cout<<" ";
+	}
+	else
+	{           cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	
+	for(int a=1;a<19;a++)
+	{
+	Sleep(20);
+	if(a==5 ||a==6 || a==14|| a==13|| a==1|| a==18)
+	{
+	 		cout<<" ";
+	}
+	else
+	{         
+			  cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	
+	for(int a=1;a<19;a++)
+	{
+	Sleep(20);
+	if(a==5 || a==7 || a==12 || a==14)
+	{
+	 		cout<<" ";
+	}
+	else
+	{             cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	Sleep(20);    
+	if(a==5 || a==8 || a==11 || a==14)
+	{
+	 		cout<<" ";
+	}
+	else
+	{        cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	Sleep(20);
+	if(a==5 || a==9 || a==10 || a==14)
+	{
+	 		cout<<" ";
+	}
+	else
+	{            cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	Sleep(20);
+	if(a==5 || a==14|| a==1|| a==18)
+	{
+	 		cout<<" ";
+	}
+	else
+	{              cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	 Sleep(20);
+ 	 if(a==1 || a==18|| a==2||   a==17)
+	{
+	 		cout<<" ";
+	}
+	else
+	{                 cout<<char(233);
+ 	}
+	}cout<<endl<<"\t\t\t\t";
+	for(int a=1;a<19;a++)
+	{
+	 Sleep(20);
+ 	  	if(a==1 || a==18|| a==2|| a==3|| a==16|| a==17)
+	{
+	 		cout<<" ";
+	}
+	else
+	{                  
+	cout<<char(233);
+	}
+	}cout<<endl<<"\t\t\t\t";
+	Sleep(1000);
+	system("cls");
+ }
+int main() {
+	system("Color CF");
+	splashscreen();
+	int op;
+	Patient p;
+	Doctor d;
+	Receptionist r;
+	Admin a;
+
+	do {
+	
+		system("cls");
+		cout<<"\t\t" << char(218);  for(int i=0; i<54; i++){cout << char(205);}     cout << char(191)<<endl ;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         WELCOME TO HOSPITAL MANAGEMENT SYSTEM        " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+		    	cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout<<"\t\t" << char(186) << "         Press 1. Check Patient Details               " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+                // enter 0  
+        		cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 2. Check Doctors Details               " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter4
+					cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 3. Check Receptionist Details          " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 5
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 4. Check Admin Details                 " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+				//enter 6
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "         Press 5. Exit                                " << char(186) << endl;
+				cout <<"\t\t"<< char(186) << "                                                      " << char(186) << endl;
+				cout <<"\t\t"<< char(192);  for(int i=0; i<54; i++){cout << char(205);}    cout << char(217) << endl;
+            
+
+		cin >> op;
+
+		switch (op)
+		{
+
+		case 1:
+			p.patient_menue();
+
+			break;
+
+
+		case 2:
+			d.doctor_menue();
+
+			break;
+			
+		case 3:
+			 r.receptionist_menue();
+			break;
+
+		case 4:
+			a.login();
+			break;
+
+		}
+
+		
+	} while (op != 5);
+
+	system("PAUSE");
+}
+
